@@ -79,7 +79,7 @@ const result = db.products.insertMany([
         slug: 'celular-galaxy-22-ultra',
         preco_unitario: NumberDecimal("8549.10"),
         estoque: 5,
-        categoria: 'CELULARES0,'
+        categoria: 'CELULARES'
     },
     {
         nome: 'MacBook Pro 16',
