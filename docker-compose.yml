@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  ecomm:
+    build: .
+    image: samrzn/ecomm:1.0
+
+# service ecomm: cria e remove container através do comando docker-compose up/down
+
+#  mongodb:
+#    image: mongo
+#    container_name: mongo-ecomm
