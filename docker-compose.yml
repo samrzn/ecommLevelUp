@@ -3,6 +3,8 @@ services:
   ecomm:
     build: .
     image: samrzn/ecomm:1.0
+    ports:
+      - 3000:3000
 # service ecomm: cria e remove container através do comando docker-compose up/down
 
   mongo-ecomm:
@@ -24,4 +26,4 @@ services:
 # service volumes: persiste os dados do container mongodb no volume "db-mongo-ecomm"
 
 volumes:
-  db-mongo-ecomm
+  db-mongo-ecomm:
