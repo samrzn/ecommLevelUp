@@ -3,9 +3,25 @@ services:
   ecomm:
     build: .
     image: samrzn/ecomm:1.0
-
 # service ecomm: cria e remove container através do comando docker-compose up/down
 
-#  mongodb:
-#    image: mongo
-#    container_name: mongo-ecomm
+  mongo-ecomm:
+    image: mongo
+    container_name: mongo-ecomm
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+# service mongo-ecomm: executa o mongodb pelo docker-compose
+
+    volumes:
+      - db-mongo-ecomm:/data/db
+      - type: bind
+        source: ./mongo
+        target: /mongo-scripts
+    restart: always
+    ports:
+      - 27017:27017
+# service volumes: persiste os dados do container mongodb no volume "db-mongo-ecomm"
+
+volumes:
+  db-mongo-ecomm
