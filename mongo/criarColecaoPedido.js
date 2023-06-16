@@ -109,7 +109,8 @@ const colecaoPedidos = db.createCollection("orders",
                                     bsonType: 'decimal',
                                     minimum: 0,
                                     exclusiveMinimum: true
-                                }
+                                },
+                                description: 'Informações sobre o pedido.'
                             }
                         }
                     }
