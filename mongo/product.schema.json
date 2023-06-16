@@ -34,7 +34,7 @@
             },
             "estoque": {
                 "bsonType": "number",
-                "mininum": 0,
+                "minimum": 0,
                 "description": "Quantidade do produto em estoque."
             },
             "categoria": {
