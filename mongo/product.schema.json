@@ -1,0 +1,53 @@
+{
+    "$jsonSchema": {
+        "title": "Modelagem de produtos",
+        "description": "Esquema para validação de produtos.",
+        "bsonType": "object",
+        "additionalProperties": false,
+        "required": [
+            "_id",
+            "nome",
+            "descricao",
+            "slug",
+            "estoque",
+            "categoria"
+        ],
+        "properties": {
+            "_id": {
+                "bsonType": "objectId",
+                "description": "Identificador exclusivo por categoria."
+            },
+            "nome": {
+                "bsonType": "string",
+                "minLength": 5,
+                "description": "Nome completo do produto."
+            },
+            "descricao": {
+                "bsonType": "string",
+                "minLength": 10,
+                "description": "Descrição detalhada do produto."
+            },
+            "slug": {
+                "bsonType": "string",
+                "minLength": 5,
+                "description": "Slug do produto."
+            },
+            "estoque": {
+                "bsonType": "number",
+                "mininum": 0,
+                "description": "Quantidade do produto em estoque."
+            },
+            "categoria": {
+                "bsonType": "string",
+                "enum": [
+                    "AUTOMOTIVA",
+                    "CELULARES",
+                    "INFORMÁTICA",
+                    "LIVROS",
+                    "MÓVEIS"
+                ],
+                "description": "Categorias de produtos."
+            }
+        }
+    }
+}
