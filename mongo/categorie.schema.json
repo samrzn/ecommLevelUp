@@ -1,0 +1,25 @@
+{ 
+    "$jsonSchema": {
+        "title": "Modelagem de categorias",
+        "description": "Esquema para validação de categorias.",
+        "bsonType": "object",
+        "additionalProperties": false,
+        "required": ["_id", "nome", "status"],
+        "properties": {
+            "_id": {
+                "bsonType": "objectId",
+                "description": "Identificador exclusivo por categoria."
+            },
+            "nome": {
+                "bsonType": "string",
+                "minLength": 3,
+                "description": "Nome completo da categoria."
+            },
+            "status": {
+                "bsonType": "string",
+                "enum": ["ATIVA", "INATIVA"],
+                "description": "Status de atividade da categoria."
+            }
+        }
+    }
+}
