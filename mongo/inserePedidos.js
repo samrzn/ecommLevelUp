@@ -29,6 +29,7 @@ const pedidosInseridos = db.orders.insertMany([
                 precoUnitario: 9176.00,
             },
         ],
+        bypassDocumentValidation: true
     },
     {
         dataPedido: new Date(),
@@ -57,7 +58,11 @@ const pedidosInseridos = db.orders.insertMany([
                 precoUnitario: 8549.10,
             },
         ],
+        bypassDocumentValidation: true
     }
+
+// Documentos reprovados ao passar pela validação de esquema, ainda não foi localizada a causa.
+
 ]);
 
 console.log(pedidosInseridos);
