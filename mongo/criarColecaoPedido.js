@@ -31,7 +31,7 @@ const colecaoPedidos = db.createCollection("orders",
                             'nomeCliente'
                         ],
                         properties: {
-                            accountID: {
+                            accountId: {
                                 bsonType: 'objectId',
                             },
                             nomeCliente: {
