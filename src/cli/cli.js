@@ -39,3 +39,5 @@ async function processarComando(path) {
 processarComando(args);
 
 // comando para rodar o server (arquivo db.json) via terminal 'npx json-server --watch src/cli/db.json'
+
+// comando 'npm install express' no diretório do projeto para instalar o Express
