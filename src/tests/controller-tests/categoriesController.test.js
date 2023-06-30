@@ -12,7 +12,7 @@ describe('GET em /api/admin/users/ quando não há cadastros', () => {
         response.send = jest.fn().mockReturnValue(response);
 
         jest.spyOn(Categories, 'find').mockResolvedValue([]);
-        await categoryController.findCategorias(request, response);
+        await categoryController.findCategories(request, response);
         expect(response.status).toHaveBeenCalledWith(404);
     });
 });
