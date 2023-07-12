@@ -2,7 +2,7 @@ version: "3.9"
 services:
   ecomm:
     build: .
-    image: samrzn/ecomm:2.1
+    image: samrzn/ecomm:2.2
     ports:
       - 3000:3000
     depends_on:

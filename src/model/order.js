@@ -1,16 +1,5 @@
 import mongoose from 'mongoose';
 
-const accountSchema = new mongoose.Schema(
-    {
-        _id: { type: String, auto: false },
-        accountId: { type: mongoose.Schema.Types.ObjectId, ref: 'accounts', required: true },
-        nomeCliente: { type: String, required: true }
-    },
-    {
-        versionKey: false
-    },
-);
-
 const addressSchema = new mongoose.Schema(
     {
         _id: { type: String, auto: false },
@@ -21,6 +10,17 @@ const addressSchema = new mongoose.Schema(
         cidade: { type: String, required: true },
         cep: { type: String, required: true },
         uf: { type: String, required: true }
+    },
+    {
+        versionKey: false
+    },
+);
+
+const accountSchema = new mongoose.Schema(
+    {
+        _id: { type: String, auto: false },
+        accountId: { type: mongoose.Schema.Types.ObjectId, ref: 'accounts', required: true },
+        nomeCliente: { type: String, required: true }
     },
     {
         versionKey: false
