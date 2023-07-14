@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
+    "docker run": "docker-compose up -d",
     "dev": "nodemon server.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose --detectOpenHandles",
     "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose --detectOpenHandles --coverage"
