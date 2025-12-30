@@ -1,13 +1,29 @@
 {
-    "name": "ecomm",
-    "version": "1.0.0",
-    "description": "",
-    "main": "src/main.js",
-    "scripts": {
-      "start": "node src/main.js",
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "MIT"
+  "name": "ecomm",
+  "version": "2.1.0",
+  "description": "",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "docker run": "docker-compose up -d",
+    "dev": "nodemon server.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose --detectOpenHandles",
+    "test:coverage": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose --detectOpenHandles --coverage"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@jest/globals": "^29.5.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.3.1",
+    "node-fetch": "^3.3.1",
+    "swagger-ui-express": "^4.6.3",
+    "yaml": "^2.3.1"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3"
   }
-
+}

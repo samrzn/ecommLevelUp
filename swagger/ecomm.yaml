@@ -1,0 +1,791 @@
+openapi: 3.0.3
+info:
+  title: Swagger ECOMM - OpenAPI 3.0
+  description: API utilizada no curso Alura LevelUp | <NxtDev/> - PagoNxt
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+servers:
+  - url: https://localhost:3000
+tags:
+  - name: category
+    description: Categorias de produtos.
+  - name: product
+    description: Produtos
+  - name: user
+    description: Usuários
+  - name: order
+    description: Pedidos
+paths:
+  /api/categories:
+    get:
+      tags:
+        - category
+      summary: Get all categories
+      description: Retorna categorias existentes com nome e status.
+      operationId: findCategories
+      responses:
+        "200":
+          description: SUCESSO.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/categories"
+        "404":
+          description: Nenhuma categoria encontrada.
+          content:
+            application/json:
+              example: "Not found"
+  /api/categories/{id}:
+    get:
+      tags:
+        - category
+      summary: Get one category
+      description: Retorna categoria especifica por ID.
+      operationId: findCategoryById
+      parameters:
+        - name: id
+          in: path
+          description: Id da categoria.
+          required: true
+          schema:
+            oneOf:
+              - type: string
+              - type: integer
+      responses:
+        "200":
+          description: SUCESSO.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        "404":
+          description: Nenhuma categoria encontrada.
+          content:
+            application/json:
+              example: "Not found"
+  /api/admin/categories:
+    post:
+      tags:
+        - category
+      summary: Create one category
+      description: Cria categoria com nome e status.
+      operationId: createCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createCategory"
+      responses:
+        "201":
+          description: Categoria criada.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        "404":
+          description: Erro ao criar categoria.
+          content:
+            application/json:
+              example: "Not found"
+  /api/admin/categories/update/{id}:
+    put:
+      tags:
+        - category
+      summary: Update a category
+      description: Atualiza uma categoria.
+      operationId: updateCategory
+      parameters:
+        - name: id
+          in: path
+          description: Id da categoria.
+          required: true
+          schema:
+            oneOf:
+              - type: string
+              - type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createCategory"
+      responses:
+        "200":
+          description: Categoria atualizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        "404":
+          description: Categoria não encontrada.
+          content:
+            application/json:
+              example: "Not found"
+        "400":
+          description: Requisição incorreta.
+          content:
+            application/json:
+              example: "Bad Request"
+  /api/admin/categories/remove/{id}:
+    delete:
+      tags:
+        - category
+      summary: Remove a category
+      description: Remove uma categoria.
+      operationId: deleteCategory
+      parameters:
+        - name: id
+          in: path
+          description: Id da categoria.
+          required: true
+          schema:
+            oneOf:
+              - type: string
+              - type: integer
+      responses:
+        "200":
+          description: Categoria removida com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        "404":
+          description: Categoria não encontrada.
+          content:
+            application/json:
+              example: "Not found"
+        "400":
+          description: Requisição incorreta.
+          content:
+            application/json:
+              example: "Bad Request"
+  /api/admin/categories/active/{id}:
+    put:
+      tags:
+        - category
+      summary: Active a category
+      description: Ativa categoria existente.
+      operationId: activeCategory
+      parameters:
+        - name: id
+          in: path
+          description: Id da categoria.
+          required: true
+          schema:
+            oneOf:
+              - type: string
+              - type: integer
+      responses:
+        "200":
+          description: Categoria ativada.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+        "404":
+          description: Categoria não encontrada.
+          content:
+            application/json:
+              example: "Not found"
+        "400":
+          description: Requisição incorreta.
+          content:
+            application/json:
+              example: "Bad Request"
+  /api/products:
+    get:
+      tags:
+        - product
+      summary: Get all products
+      description: Retorna todos os produtos.
+      operationId: findProduts
+      parameters:
+        - name: id
+          in: query
+          description: Id da categoria filtrada.
+          required: false
+          schema:
+            oneOf:
+              - type: string
+              - type: integer
+        - name: minEstoque
+          in: query
+          description: Valor mínimo de estoque de um produto.
+          required: false
+          schema:
+            type: integer
+        - name: maxPreco
+          in: query
+          description: Preço máximo de um produto.
+          required: false
+          schema:
+            type: integer
+        - name: minPreco
+          in: query
+          description: Preço mínimo de um produto.
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: SUCESSO.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/products"
+        "404":
+          description: Nenhum produto encontrado.
+          content:
+            application/json:
+              example: "Not found"
+  /api/products/{id}:
+    get:
+      tags:
+        - product
+      summary: Get one product
+      description: Retorna produto especifico por ID.
+      operationId: findProductById
+      parameters:
+        - name: id
+          in: path
+          description: Id do produto.
+          required: true
+          schema:
+            oneOf:
+              - type: string
+              - type: integer
+      responses:
+        "200":
+          description: SUCESSO.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        "404":
+          description: Nenhum produto encontrado.
+          content:
+            application/json:
+              example: "Not found"
+  /api/admin/products:
+    post:
+      tags:
+        - product
+      summary: Create one product
+      description: Cria um produto.
+      operationId: createProduct
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createProduct"
+      responses:
+        "201":
+          description: Produto criado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        "404":
+          description: Erro ao criar produto.
+          content:
+            application/json:
+              example: "Not found"
+  /api/admin/products/update/{id}:
+    put:
+      tags:
+        - product
+      summary: Update a product
+      description: Atualiza um produto.
+      operationId: updateProduct
+      parameters:
+        - name: id
+          in: path
+          description: Id do produto.
+          required: true
+          schema:
+            oneOf:
+              - type: string
+              - type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createProduct"
+      responses:
+        "200":
+          description: Produto atualizado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        "404":
+          description: Produto não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+        "400":
+          description: Requisição incorreta.
+          content:
+            application/json:
+              example: "Bad Request"
+  /api/admin/products/remove/{id}:
+    delete:
+      tags:
+        - product
+      summary: Remove a product
+      description: Remove um produto.
+      operationId: deleteProduct
+      parameters:
+        - name: id
+          in: path
+          description: Id do produto.
+          required: true
+          schema:
+            oneOf:
+              - type: string
+              - type: integer
+      responses:
+        "200":
+          description: Produto removido com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/product"
+        "404":
+          description: Produto não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+        "400":
+          description: Requisição incorreta.
+          content:
+            application/json:
+              example: "Bad Request"
+  /api/admin/users:
+    get:
+      tags:
+        - user
+      summary: Get all users
+      description: Retorna todos usuários.
+      operationId: findUsers
+      responses:
+        "200":
+          description: SUCESSO.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/users"
+        "404":
+          description: Nenhum usuário encontrado.
+          content:
+            application/json:
+              example: "Not found"
+    post:
+      tags:
+        - user
+      summary: Create one user
+      description: Cria um usuário.
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createUser"
+      responses:
+        "201":
+          description: Usuário criado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+        "404":
+          description: Erro ao criar usuário.
+          content:
+            application/json:
+              example: "Not found"
+  /api/users/{id}:
+    get:
+      tags:
+        - user
+      summary: Get one user
+      description: Retorna um usuário especifico.
+      operationId: findUserById
+      parameters:
+        - name: id
+          in: path
+          description: Id do usuário.
+          required: true
+          schema:
+            oneOf:
+              - type: string
+              - type: integer
+      responses:
+        "200":
+          description: SUCESSO.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+        "404":
+          description: Nenhum usuário encontrado.
+          content:
+            application/json:
+              example: "Not found"
+  /api/admin/users/update/{id}:
+    put:
+      tags:
+        - user
+      summary: Update a user
+      description: Atualiza um usuário.
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: path
+          description: Id do usuário.
+          required: true
+          schema:
+            oneOf:
+              - type: string
+              - type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createUser"
+      responses:
+        "200":
+          description: Usuário atualizado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+        "404":
+          description: Usuário não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+        "400":
+          description: Requisição incorreta.
+          content:
+            application/json:
+              example: "Bad Request"
+  /api/admin/users/remove/{id}:
+    delete:
+      tags:
+        - user
+      summary: Remove a user
+      description: Remove um usuário.
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          description: Id do usuário.
+          required: true
+          schema:
+            oneOf:
+              - type: string
+              - type: integer
+      responses:
+        "200":
+          description: Usuário removido com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/user"
+        "404":
+          description: Usuário não encontrado.
+          content:
+            application/json:
+              example: "Not found"
+        "400":
+          description: Requisição incorreta.
+          content:
+            application/json:
+              example: "Bad Request"
+  /api/orders/{id}:
+    get:
+      tags:
+        - order
+      summary: Get one order
+      description: Retorna um pedido especifico por ID.
+      operationId: findOrderById
+      parameters:
+        - name: id
+          in: path
+          description: Id do pedido.
+          required: true
+          schema:
+            oneOf:
+              - type: string
+              - type: integer
+      responses:
+        "200":
+          description: SUCESSO.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/order"
+        "404":
+          description: Nenhum pedido encontrado.
+          content:
+            application/json:
+              example: "Not found"
+  /api/orders:
+    post:
+      tags:
+        - order
+      summary: Create one order
+      description: Cria um pedido.
+      operationId: createOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/createOrder"
+      responses:
+        "201":
+          description: Pedido criado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/order"
+        "404":
+          description: Erro ao criar pedido.
+          content:
+            application/json:
+              example: "Not found"
+components:
+  schemas:
+    category:
+      type: object
+      properties:
+        _id:
+          oneOf:
+            - type: string
+            - type: integer
+        nome:
+          type: string
+        status:
+          type: string
+    categories:
+      type: array
+      items:
+        $ref: "#/components/schemas/category"
+    createCategory:
+      type: object
+      properties:
+        nome:
+          type: string
+        status:
+          type: string
+    product:
+      type: object
+      properties:
+        _id:
+          oneOf:
+            - type: string
+            - type: integer
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        preco:
+          type: number
+        estoque:
+          type: integer
+        categoria:
+          type: string
+    products:
+      type: array
+      items:
+        $ref: "#/components/schemas/product"
+    createProduct:
+      type: object
+      properties:
+        nome:
+          type: string
+        descricao:
+          type: string
+        slug:
+          type: string
+        preco:
+          type: number
+        estoque:
+          type: integer
+        categoria:
+          type: string
+    user:
+      type: object
+      properties:
+        _id:
+          oneOf:
+            - type: string
+            - type: integer
+        username:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        cpf:
+          type: string
+        telefone:
+          type: string
+        dataCriacao:
+          type: string
+        endereco:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              oneOf:
+                - type: string
+                - type: integer
+            complemento:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+    users:
+      type: array
+      items:
+        $ref: "#/components/schemas/user"
+    createUser:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        senha:
+          type: string
+        cpf:
+          type: string
+        telefone:
+          type: string
+        endereco:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              oneOf:
+                - type: string
+                - type: integer
+            complemento:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+    order:
+      type: object
+      properties:
+        _id:
+          oneOf:
+            - type: string
+            - type: integer
+        dataPedido:
+          type: string
+        account:
+          type: object
+          properties:
+            accountId:
+              oneOf:
+                - type: string
+                - type: integer
+            nomeCliente:
+              type: string
+        enderecoEntrega:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              oneOf:
+                - type: string
+                - type: integer
+            complemento:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+        itens:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                oneOf:
+                  - type: string
+                  - type: integer
+              quantidade:
+                type: integer
+              desconto:
+                type: number
+              precoUnitario:
+                type: number
+    createOrder:
+      type: object
+      properties:
+        account:
+          type: object
+          properties:
+            accountId:
+              oneOf:
+                - type: string
+                - type: integer
+            nomeCliente:
+              type: string
+        enderecoEntrega:
+          type: object
+          properties:
+            bairro:
+              type: string
+            rua:
+              type: string
+            numero:
+              oneOf:
+                - type: string
+                - type: integer
+            complemento:
+              type: string
+            cep:
+              type: string
+            cidade:
+              type: string
+            uf:
+              type: string
+        itens:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                oneOf:
+                  - type: string
+                  - type: integer
+              quantidade:
+                type: integer
+              desconto:
+                type: number
+              precoUnitario:
+                type: number

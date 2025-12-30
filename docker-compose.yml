@@ -2,9 +2,15 @@ version: "3.9"
 services:
   ecomm:
     build: .
-    image: samrzn/ecomm:1.0
+    image: samrzn/ecomm:2.2
     ports:
       - 3000:3000
+    depends_on:
+      - mongo-ecomm
+    links:
+      - mongo-ecomm
+    environment:
+      MONGO_HOST: mongo-ecomm
 # service ecomm: cria e remove container através do comando docker-compose up/down
 
   mongo-ecomm:
